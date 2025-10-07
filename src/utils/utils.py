@@ -76,12 +76,6 @@ def train_and_evaluate_models(datasets: Dict[str, Dict[str, Tuple[pd.DataFrame, 
                 'test_acc': test_results['accuracy']
             }
             
-            # Save reports
-            with open(output_dir / f"{model_name}_{dataset_mode}_val_report.txt", 'w') as f:
-                f.write(pd.DataFrame(val_results['classification_report']).round(3).to_string())
-            with open(output_dir / f"{model_name}_{dataset_mode}_test_report.txt", 'w') as f:
-                f.write(pd.DataFrame(test_results['classification_report']).round(3).to_string())
-    
     # Plot results
     plot_results(results, list(datasets.keys()), output_dir)
     
@@ -147,4 +141,3 @@ def plot_results(results: Dict[str, Dict[str, Dict[str, float]]],
     
     plt.tight_layout()
     plt.savefig(output_dir / 'model_comparisons.png', dpi=300, bbox_inches='tight')
-    plt.show()

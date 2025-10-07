@@ -6,8 +6,8 @@ data:
   k_features: 10                    
   random_state: 42
 
-models:
-  n_trials: 5                                                                                                                                       
+training:
+  n_trials: 10                                                                                                                                       
                                                                                                                 
 paths:                                         
   models: models/             

@@ -1,6 +1,5 @@
 # src/config/schema.py
 from pydantic import BaseModel, Field, validator
-from typing import Dict, Any
 from pathlib import Path
 
 class DataConfig(BaseModel):
@@ -16,13 +15,13 @@ class PathConfig(BaseModel):
     models: Path = Field(default=Path("models"), description="Directory to save models")
     logs: Path = Field(default=Path("logs"), description="Directory to save logs")
 
-class ModelsConfig(BaseModel):
+class TrainingConfig(BaseModel):
     n_trials: int = Field(50, ge=1, description="Number of trials for hyperparameter optimization")
 
 class AppConfig(BaseModel):
     data: DataConfig
     paths: PathConfig
-    models: ModelsConfig
+    training: TrainingConfig
 
     @validator('data')
     def validate_paths(cls, v):

@@ -1,5 +1,5 @@
 # scripts/train.py
-
+import pandas as pd
 
 from src.utils.utils import load_datasets_from_csv, train_and_evaluate_models
 from src.config.loader import load_config
@@ -13,26 +13,18 @@ def main():
     config = load_config()
     set_seed(config)
 
-    data_path = config.data.raw_path
     processed_dir = config.data.processed_path
-    k_features = config.data.k_features
     output_dir = config.paths.outputs                                                                            
-    n_trials = config.models.n_trials
+    n_trials = config.training.n_trials
     
-    # Load data
-    loader = HeartDiseaseDataLoader(
-        data_path=data_path,
-        processed_dir=processed_dir,
-        k_features=k_features
-    )
     datasets = load_datasets_from_csv(processed_dir)
     
     # Initialize models
     models = {
         'DecisionTree': DecisionTreeModel(),
         'RandomForest': RandomForestModel(),
-        'AdaBoost': AdaBoostModel()
-        # 'GradientBoosting': GradientBoostingModel()
+        'AdaBoost': AdaBoostModel(),
+        'GradientBoosting': GradientBoostingModel()
     }
     
     # Train and evaluate
