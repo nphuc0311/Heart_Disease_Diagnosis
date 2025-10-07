@@ -7,7 +7,7 @@ from .schema import AppConfig
 
 logger = logging.getLogger(__name__)
 
-def _load_config(config_path: Optional[Path] = None) -> AppConfig:
+def load_config(config_path: Optional[Path] = None) -> AppConfig:
     if config_path is None:
         config_path = Path("configs/config.yaml")
     
@@ -29,5 +29,3 @@ def _load_config(config_path: Optional[Path] = None) -> AppConfig:
     except Exception as e:
         logger.error(f"Config loading error: {e}")
         raise
-
-config = _load_config()

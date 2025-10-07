@@ -2,9 +2,7 @@ import os
 import random
 import numpy as np
 
-from src.config.loader import config
-
-def set_seed():
+def set_seed(config):
     seed = config.data.random_state
     os.environ["PYTHONHASHSEED"] = str(seed)
     random.seed(seed)

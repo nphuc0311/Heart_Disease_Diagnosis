@@ -4,3 +4,7 @@ outs:
   nfiles: 1
   hash: md5
   path: raw
+
+meta:
+  version: v0.1.0
+  date: 05/10/2025

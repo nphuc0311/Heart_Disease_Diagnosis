@@ -17,13 +17,6 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_selection import mutual_info_classif
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, MinMaxScaler
 
-from src.utils.seed import set_seed
-
-
-# Set seeds for reproducibility
-set_seed()
-
-
 class HeartDiseaseDataLoader:
     """
     A data loader class for the Heart Disease Diagnosis project.
