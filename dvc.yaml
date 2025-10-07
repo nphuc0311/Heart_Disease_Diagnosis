@@ -1,0 +1,47 @@
+vars:
+  - configs/config.yaml
+
+stages:
+  download_raw_data:
+    cmd: python scripts/download_data.py
+    deps:
+      - scripts/download_data.py
+    outs:
+      - data/raw/cleveland.csv
+
+  prepare_data:
+    cmd: python scripts/process_data.py
+    params:
+      - configs/config.yaml:
+        - data.raw_path
+        - data.processed_path
+        - data.val_size
+        - data.test_size
+        - data.k_features
+    deps:
+      - scripts/process_data.py
+    outs:
+      - data/processed/
+
+  train:
+    cmd: python scripts/train.py
+    params:
+      - configs/config.yaml:
+        - training.n_trials
+        - data.processed_path
+    deps:
+      - scripts/train.py
+      - src/models/ensemble.py
+    outs:
+      - ${paths.outputs}/training_summary.csv
+      - ${paths.outputs}/model_comparisons.png
+    metrics:
+      - ${paths.outputs}/training_summary.csv
+    plots:
+      - ${paths.outputs}/training_summary.csv:
+          template: bar
+          x: model
+          y:
+            - val_acc
+            - test_acc
+          title: "Model Accuracy Comparison"

@@ -3,14 +3,13 @@ data:
   processed_path: data/processed/
   val_size: 0.2
   test_size: 0.1
-  k_features: 10                    
+  k_features: 10
   random_state: 42
 
 training:
-  n_trials: 10                                                                                                                                       
-                                                                                                                
-paths:                                         
-  models: models/             
-  outputs: outputs/
-  logs: outputs/logs/
+  n_trials: 10
 
+paths:
+  models: models/
+  outputs: outputs/
+  

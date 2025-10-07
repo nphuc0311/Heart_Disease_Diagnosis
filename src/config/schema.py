@@ -13,7 +13,6 @@ class DataConfig(BaseModel):
 class PathConfig(BaseModel):
     outputs: Path = Field(default=Path("outputs"), description="Directory to save outputs")
     models: Path = Field(default=Path("models"), description="Directory to save models")
-    logs: Path = Field(default=Path("logs"), description="Directory to save logs")
 
 class TrainingConfig(BaseModel):
     n_trials: int = Field(50, ge=1, description="Number of trials for hyperparameter optimization")
