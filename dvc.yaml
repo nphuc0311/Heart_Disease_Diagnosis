@@ -3,9 +3,9 @@ vars:
 
 stages:
   download_raw_data:
-    cmd: python scripts/download_data.py
+    cmd: python scripts/downloads.py
     deps:
-      - scripts/download_data.py
+      - scripts/downloads.py
     outs:
       - data/raw/cleveland.csv
 
@@ -35,13 +35,7 @@ stages:
     outs:
       - ${paths.outputs}/training_summary.csv
       - ${paths.outputs}/model_comparisons.png
-    metrics:
-      - ${paths.outputs}/training_summary.csv
-    plots:
-      - ${paths.outputs}/training_summary.csv:
-          template: bar
-          x: model
-          y:
-            - val_acc
-            - test_acc
-          title: "Model Accuracy Comparison"
+    # metrics:
+    #   - ${paths.outputs}/training_summary.csv
+    # plots:
+    #   - ${paths.outputs}/training_summary.csv

@@ -1,0 +1,58 @@
+schema: '2.0'
+stages:
+  download_raw_data:
+    cmd: python scripts/downloads.py
+    deps:
+    - path: scripts/downloads.py
+      hash: md5
+      md5: a429f84af575e43277072a1e045cb041
+      size: 3698
+    outs:
+    - path: data/raw/cleveland.csv
+      hash: md5
+      md5: 2fcceb5ea2a128f3e1b176098099c021
+      size: 18455
+  prepare_data:
+    cmd: python scripts/process_data.py
+    deps:
+    - path: scripts/process_data.py
+      hash: md5
+      md5: c6cea3ab1384214a8414c17022f46748
+      size: 377
+    params:
+      configs/config.yaml:
+        data.k_features: 10
+        data.processed_path: data/processed/
+        data.raw_path: data/raw/cleveland.csv
+        data.test_size: 0.1
+        data.val_size: 0.2
+    outs:
+    - path: data/processed/
+      hash: md5
+      md5: d8c998fce6d89ebf1a1dd5ba418651e5.dir
+      size: 147054
+      nfiles: 12
+  train:
+    cmd: python scripts/train.py
+    deps:
+    - path: scripts/train.py
+      hash: md5
+      md5: 611b49280f5ade6ed6844912e32ccc37
+      size: 1279
+    - path: src/models/ensemble.py
+      hash: md5
+      md5: bf70b468e748bf674a633dcd13075a7e
+      size: 6778
+    params:
+      configs/config.yaml:
+        data.processed_path: data/processed/
+        training.n_trials: 10
+    outs:
+    - path: outputs/model_comparisons.png
+      hash: md5
+      md5: 256789a6e2339536929e79afffd58bf9
+      size: 246562
+    - path: outputs/training_summary.csv
+      hash: md5
+      md5: 3f92ec0ecd1512bb5300a73afcd8228d
+      size: 1080

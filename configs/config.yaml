@@ -10,6 +10,6 @@ training:
   n_trials: 10
 
 paths:
-  models: models/
-  outputs: outputs/
+  models: models
+  outputs: outputs
   
